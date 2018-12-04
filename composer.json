@@ -1,0 +1,19 @@
+{
+  "name": "4spacesdk/ci4debugtool",
+  "description": "Debug Tool for CodeIgniter 4",
+  "authors": [
+    {
+      "name": "Martin Hansen",
+      "email": "martin@4spaces.dk"
+    }
+  ],
+  "license": "MIT",
+  "require": {
+    "php": ">=7.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "DebugTool\\": ""
+    }
+  }
+}
