@@ -54,4 +54,25 @@ class Data {
             Data::$store['debug'][] = "$time: $info";
     }
 
+    public static function memory() {
+        $memory_limit = ini_get('memory_limit');
+        if(preg_match('/^(\d+)(.)$/', $memory_limit, $matches)) {
+            if($matches[2] == 'M') {
+                $memory_limit = $matches[1] * 1024 * 1024; // nnnM -> nnn MB
+            } else if($matches[2] == 'K') {
+                $memory_limit = $matches[1] * 1024; // nnnK -> nnn KB
+            }
+        }
+        $memory_limit = $memory_limit / 1024 / 1024;
+        $memory_limit = round($memory_limit, 0);
+
+        $mem = memory_get_usage(true);
+        $mem = $mem / 1024 / 1024;
+        $mem = round($mem, 4);
+
+        $mb = $mem . 'mb of ' . $memory_limit . 'mb';
+
+        Data::debug($mb . ' (' . round(100 / $memory_limit * $mem, 0) . '%)');
+    }
+
 }
