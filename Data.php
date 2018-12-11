@@ -54,7 +54,7 @@ class Data {
             Data::$store['debug'][] = "$time: $info";
     }
 
-    public static function memory() {
+    public static function memory($append = '') {
         $memory_limit = ini_get('memory_limit');
         if(preg_match('/^(\d+)(.)$/', $memory_limit, $matches)) {
             if($matches[2] == 'M') {
@@ -72,7 +72,7 @@ class Data {
 
         $mb = $mem . 'mb of ' . $memory_limit . 'mb';
 
-        Data::debug($mb . ' (' . round(100 / $memory_limit * $mem, 0) . '%)');
+        Data::debug($mb . ' (' . round(100 / $memory_limit * $mem, 0) . '%)', $append);
     }
 
 }
