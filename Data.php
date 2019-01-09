@@ -17,6 +17,10 @@ class Data {
         Data::$store[$key] = $value;
     }
 
+    public static function del($key) {
+        unset(Data::$store[$key]);
+    }
+
     public static function getStore() {
         return Data::$store;
     }
