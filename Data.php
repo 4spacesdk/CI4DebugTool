@@ -25,6 +25,10 @@ class Data {
         return Data::$store;
     }
 
+    public static function get($key) {
+        return isset(Data::$store[$key]) ? Data::$store[$key] : null;
+    }
+
     public static function lastQuery() {
         Data::sql(Database::connect()->showLastQuery());
     }
