@@ -29,11 +29,15 @@ class Data {
         return isset(Data::$store[$key]) ? Data::$store[$key] : null;
     }
 
-    public static function lastQuery() {
-        Data::sql(Database::connect()->showLastQuery());
+    public static function lastQuery($return = false) {
+        return Data::sql(Database::connect()->showLastQuery(), $return);
     }
-    public static function sql($sql) {
-        Data::debug(str_replace("\n", " ", str_replace("\t", " ", $sql)));
+    public static function sql($sql, $return = false) {
+        $sql = str_replace("\n", " ", str_replace("\t", " ", $sql));
+        if($return)
+            return $sql;
+        else
+            Data::debug($sql);
     }
     public static function debug($info = 'test') {
         $func_args = func_get_args();
