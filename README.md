@@ -33,7 +33,7 @@ For fast debugging, add this Live Template to your IDE: `Data::debug(get_class($
 ## Code Igniter 4 Error page
 To see the debug data in Code Igniter 4 Error page follow these steps
 ### 1
-Edit `application/Views/errors/html/error_exception.php` and add a tab for Data in the list with id `#tabs`.
+Edit `app/Views/errors/html/error_exception.php` and add a tab for Data in the list with id `#tabs`.
 ```html
 <li><a href="#data">Data</a></li>
 ```
@@ -42,12 +42,12 @@ In the same file add this section under the div with class `.tab-content`.
 ```html
 <!-- Data -->
 <div class="content" id="data">
-    <pre><code><?=json_encode(Data::getStore(), JSON_PRETTY_PRINT)?></code></pre>
+    <pre><code><?=json_encode(\DebugTool\Data::getStore(), JSON_PRETTY_PRINT)?></code></pre>
 </div>
 ```
 
 ### 3 Optional
-To top is all up. Go to `application/Views/errors/debug.js` and add this at the bottom of `init()`-function
+To top is all up. Go to `app/Views/errors/debug.js` and add this at the bottom of `init()`-function
 ```javascript
 // Show last selected tab
 if(window.localStorage.getItem('lastTab')) {
