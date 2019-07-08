@@ -68,7 +68,7 @@ class Data {
             $debug = "$time: $info";
 
         if(Services::request()->isCLI())
-            CLI::print(json_encode($debug, JSON_PRETTY_PRINT));
+            CLI::print(is_array($debug) ? json_encode($debug, JSON_PRETTY_PRINT) : $debug."\n");
         else
             Data::$store['debug'][] = $debug;
     }
