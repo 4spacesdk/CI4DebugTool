@@ -1,5 +1,7 @@
 <?php namespace DebugTool;
+use CodeIgniter\CLI\CLI;
 use Config\Database;
+use Config\Services;
 
 /**
  * Created by PhpStorm.
@@ -47,23 +49,28 @@ class Data {
         $time = explode(" ",microtime());
         $time = date("H:i:s", $time[1]).substr((string)$time[0],1,4);
         if(is_object($info) && method_exists($info, 'count') && method_exists($info, 'allToArray') && $info->count())
-            Data::$store['debug'][] = [
+            $debug = [
                 $time => $info->allToArray()
             ];
         else if(is_object($info) && method_exists($info, 'toArray'))
-            Data::$store['debug'][] = [
+            $debug = [
                 $time => $info->toArray()
             ];
         else if(is_object($info))
-            Data::$store['debug'][] = [
+            $debug = [
                 $time => $info
             ];
         else if(is_array($info))
-            Data::$store['debug'][] = [
+            $debug = [
                 $time => $info
             ];
         else
-            Data::$store['debug'][] = "$time: $info";
+            $debug = "$time: $info";
+
+        if(Services::request()->isCLI())
+            CLI::print(json_encode($debug, JSON_PRETTY_PRINT));
+        else
+            Data::$store['debug'][] = $debug;
     }
 
     public static function memory($append = '') {
