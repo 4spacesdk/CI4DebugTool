@@ -31,9 +31,14 @@ class Data {
         return isset(Data::$store[$key]) ? Data::$store[$key] : null;
     }
 
+    public static function getDebugger() {
+        return isset(self::$store['debug']) ? self::$store['debug'] : [];
+    }
+
     public static function lastQuery($return = false) {
         return Data::sql(Database::connect()->showLastQuery(), $return);
     }
+
     public static function sql($sql, $return = false) {
         $sql = str_replace("\n", " ", str_replace("\t", " ", $sql));
         if($return)
