@@ -74,8 +74,8 @@ class Data {
 
         if(Services::request()->isCLI())
             CLI::print(is_array($debug) ? json_encode($debug, JSON_PRETTY_PRINT) : $debug."\n");
-        else
-            Data::$store['debug'][] = $debug;
+
+        Data::$store['debug'][] = $debug;
     }
 
     public static function memory($append = '') {
